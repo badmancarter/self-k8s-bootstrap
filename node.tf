@@ -1,20 +1,19 @@
 # configured aws provider with proper credentials
 provider "aws" {
-  region                   = "us-east-2"
-  shared_config_files      = ["/Users/austi/.aws/conf"]
-  shared_credentials_files = ["/Users/austi/.aws/credentials"]
-  profile                  = "austin"
+  region                   = "us-east-1"
+
+  profile                  = "default"
 }
 
 
 # Create a remote backend for your terraform 
 terraform {
   backend "s3" {
-    bucket         = "austins-k8s-tfstate"
+    bucket         = "bodes-k8s-tfstate"
     dynamodb_table = "k8s-state"
     key            = "LockID"
     region         = "us-east-1"
-    profile        = "austin"
+    profile        = "default"
   }
 }
 
@@ -152,7 +151,7 @@ resource "aws_key_pair" "generated_key" {
 
 # launch the ec2 instance
 resource "aws_instance" "ec2_instance" {
-  ami                    = "ami-0f30a9c3a48f3fa79"
+  ami                    = "ami-04b70fa74e45c3917"
   instance_type          = "t3.medium"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]

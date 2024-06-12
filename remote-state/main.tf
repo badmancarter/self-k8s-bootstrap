@@ -1,10 +1,10 @@
 provider "aws" {
   region = "us-east-1"
-  profile= "austin"
+  profile= "default"
 }
 
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "austins-k8s-tfstate"
+  bucket = "bodes-k8s-tfstate"
      
   lifecycle {
     prevent_destroy = true
